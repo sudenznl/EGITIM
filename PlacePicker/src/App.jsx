@@ -17,12 +17,12 @@ function App() {
   const [availablePlaces, setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
-  useEffect(() => {
-    // bu yöntemi kullanıdığımızda kullanıcıdam konum almak için izin isteyecek
+  // bu yöntemi kullanıdığımızda kullanıcıdam konum almak için izin isteyecek
     // ve bu izin verildiğinde devam edecek ve konumu getirecek.
 
     //konuma bağlı olan kod bu işlevin içerisinde yürütülmelidir. Çünkü konum asenkron olarak alınır, yani fonksiyon hemen çalışmaz.
     //Konumu almadan önce dışarıda kod çalıştırırsak kullanıcı konumu henüz gelmediği için hata olur/değer undefined olur.
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const sortedPlaces = sortPlacesByDistance(
         AVAILABLE_PLACES,
