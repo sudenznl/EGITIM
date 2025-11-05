@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Places from "./components/Places.jsx";
 import { AVAILABLE_PLACES } from "./data.js";
 import Modal from "./components/Modal.jsx";
@@ -52,6 +52,7 @@ function App() {
       return [place, ...prevPickedPlaces];
     });
 
+    const storedIds =JSON.parse(localStorage.getItem('selectedPlaces') || []);
     if (storedIds.indexOf(id) === -1) {
       localStorage.setItem(
         "selectedPlaces",
@@ -60,18 +61,19 @@ function App() {
     }
   }
 
-  function handleRemovePlace() {
-    setPickedPlaces((prevPickedPlaces) =>
-      prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
-    );
-    setModalIsOpen(false);
+  const handleRemovePlace = useCallback(
+    function handleRemovePlace() {
+      setPickedPlaces((prevPickedPlaces) =>
+        prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
+      );
+      //setModalIsOpen(false);
 
-    const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
-    localStorage.setItem(
-      "selectedPlaces",
-      JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
-    );
-  }
+      const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
+      localStorage.setItem(
+        "selectedPlaces",
+        JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
+      );
+    }, []);
 
   return (
     <>
@@ -84,23 +86,24 @@ function App() {
 
       <header>
         <img src={logoImg} alt="Stylized globe" />
-        <h1>PlacePicker</h1>
+        <h1>Gezi Takvimi</h1>
         <p>
-          Create your personal collection of places you would like to visit or
-          you have visited.
+          Ziyaret etmek istediğiniz veya ziyaret ettiğiniz yerlerden oluşan 
+          kişisel koleksiyonunuzu oluşturun.
         </p>
       </header>
+
       <main>
         <Places
-          title="I'd like to visit ..."
-          fallbackText={"Select the places you would like to visit below."}
+          title="Ziyaret etmek isterim ..."
+          fallbackText={"Aşağıdan ziyaret etmek istediğiniz yerleri seçin."}
           places={pickedPlaces}
           onSelectPlace={handleStartRemovePlace}
         />
         <Places
-          title="Available Places"
+          title="Mevcut Yerler"
           places={availablePlaces}
-          fallbackText="Sorting places by distance..."
+          fallbackText="Yerlerin mesafeye göre sırası..."
           onSelectPlace={handleSelectPlace}
         />
       </main>
