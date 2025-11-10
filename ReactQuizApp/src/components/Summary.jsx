@@ -11,7 +11,7 @@ export default function Summary({ userAnswers }) {
     const skippedAnswersShare = Math.round(
         (skippedAnswers.length / userAnswers.length) * 100
     );
-
+ 
     const correctAnswersShare = Math.round(
         (correctAnswers.length / userAnswers.length) * 100
     );
