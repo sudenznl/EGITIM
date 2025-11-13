@@ -19,6 +19,7 @@ function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  //burada bir http isteği gönderiliyor ve bazı yükleme durumlarını ve potansiyal olarak hata durumu yönetiliyor : 
   useEffect(() => {
     async function fetchPlaces() {
       setIsFetching(true);
