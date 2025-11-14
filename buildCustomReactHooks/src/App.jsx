@@ -23,7 +23,7 @@ function App() {
     setFetchedData: setUserPlaces,
   } = useFetch(fetchUserPlaces, []);
 
-  function handleStartRemovePlace(place) {
+  function handleStartRemovePlace(place) { 
     setModalIsOpen(true);
     selectedPlace.current = place;
   }

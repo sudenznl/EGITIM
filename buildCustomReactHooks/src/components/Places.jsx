@@ -1,6 +1,6 @@
 export default function Places({
   title,
-  places = [],
+  places,
   fallbackText,
   onSelectPlace,
   isLoading,
