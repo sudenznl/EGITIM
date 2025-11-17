@@ -1,37 +1,60 @@
+import { useState } from "react";
+
 export default function Signup() {
-    function handleSubmit(event) {
-       event.preventDefault();
-        
-       const fd = new FormData(event.target);
-       const acquisitionChannel = fd.getAll('acquisition');
-       const data = Object.formEntries(fd.entries());
-       data.acquisition = acquisitionChannel;
-       console.log(data);
+  const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const fd = new FormData(event.target);
+    const acquisitionChannel = fd.getAll("acquisition");
+    const data = Object.fromEntries(fd.entries());
+    data.acquisition = acquisitionChannel;
+
+    if (data.password !== data["confirm-password"]) {
+      //- geçersiz yaptığı için paranteze almamız gerekiyor.
+      setPasswordsAreNotEqual(true);
+      return;
     }
+
+    console.log(data);
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Welcome on board!</h2>
-      <p>We just need a little bit of data from you to get you started 🚀</p>
+      <h2>Hoş Geldiniz!</h2>
+      <p>Başlamak için bizimle bilgilerinizi paylaşın</p>
 
       <div className="control">
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" name="email" />
+        <input id="email" type="email" name="email" required />
       </div>
 
       <div className="control-row">
         <div className="control">
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
+          <label htmlFor="password">Şifre</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            required
+            minLength={6}
+          />
         </div>
 
         <div className="control">
-          <label htmlFor="confirm-password">Confirm Password</label>
+          <label htmlFor="confirm-password">Şifre Başarılı</label>
           <input
             id="confirm-password"
             type="password"
             name="confirm-password"
+            required
           />
+
+          <div className="controller-error">
+            {passwordsAreNotEqual && <p>şifre eşleşmeli !</p>}
+          </div>
+
         </div>
       </div>
 
@@ -39,29 +62,29 @@ export default function Signup() {
 
       <div className="control-row">
         <div className="control">
-          <label htmlFor="first-name">First Name</label>
-          <input type="text" id="first-name" name="first-name" />
+          <label htmlFor="first-name">İsim</label>
+          <input type="text" id="first-name" name="first-name" required />
         </div>
 
         <div className="control">
-          <label htmlFor="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" />
+          <label htmlFor="last-name">Soy İsim</label>
+          <input type="text" id="last-name" name="last-name" required />
         </div>
       </div>
 
       <div className="control">
-        <label htmlFor="phone">What best describes your role?</label>
-        <select id="role" name="role">
-          <option value="student">Student</option>
-          <option value="teacher">Teacher</option>
-          <option value="employee">Employee</option>
-          <option value="founder">Founder</option>
-          <option value="other">Other</option>
+        <label htmlFor="phone">Rolüünüzü seçiniz</label>
+        <select id="role" name="role" required>
+          <option value="student">Öğrenci</option>
+          <option value="teacher">Öğretmen</option>
+          <option value="employee">Çalışan</option>
+          <option value="founder">Kurucu</option>
+          <option value="other">Diğer</option>
         </select>
       </div>
 
       <fieldset>
-        <legend>How did you find us?</legend>
+        <legend>Hizmetimizi Nasıl Buldunuz?</legend>
         <div className="control">
           <input
             type="checkbox"
@@ -79,28 +102,33 @@ export default function Signup() {
             name="acquisition"
             value="friend"
           />
-          <label htmlFor="friend">Referred by friend</label>
+          <label htmlFor="friend">Arkadaşım tarafınfan referans edildi</label>
         </div>
 
         <div className="control">
           <input type="checkbox" id="other" name="acquisition" value="other" />
-          <label htmlFor="other">Other</label>
+          <label htmlFor="other">Diğer</label>
         </div>
       </fieldset>
 
       <div className="control">
         <label htmlFor="terms-and-conditions">
-          <input type="checkbox" id="terms-and-conditions" name="terms" />I
-          agree to the terms and conditions
+          <input
+            type="checkbox"
+            id="terms-and-conditions"
+            name="terms"
+            required
+          />
+          Hizmet Şartlarını ve Koşulları kabul ediyorum.
         </label>
       </div>
 
       <p className="form-actions">
         <button type="reset" className="button button-flat">
-          Reset
+          Sıfırla
         </button>
         <button type="submit" className="button">
-          Sign up
+          Giriş Yap
         </button>
       </p>
     </form>
