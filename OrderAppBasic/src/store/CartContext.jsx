@@ -4,6 +4,7 @@ const CartContext =  createContext({
     items: [],   //sepet öğelerinin listesi.
     addItem: (item) => {},
     removeItem: (id) => {},
+    clearCart: () => {},
 });
 
 function cartReducer(state, action) {
@@ -76,6 +77,11 @@ function cartReducer(state, action) {
         return { ...state, items: updatedItems }
     } 
 
+    if(action.type === 'CLEAR_CART')
+    {
+        return{ ...state, items: [] }
+    }
+
     // Action tanımlı değilse state'i aynen geri döndür
     return state;
     }
@@ -95,11 +101,17 @@ function cartReducer(state, action) {
         dispatchCartAction({ type: 'REMOVE_ITEM', id }); // reducer'a "REMOVE_ITEM" action gönder
     }
 
+    //ürünü sipariş ettikten sonra sepeti temizliyoruz:
+    function clearCart() {
+    dispatchCartAction({ type: 'CLEAR_CART' });
+    }
+
     // Context içinde paylaşılacak değerler: sepetteki ürünler ve ekleme/silme fonksiyonları
     const cartContext = {
         items: cart.items,
         addItem,
-        removeItem
+        removeItem,
+        clearCart
     };
 
     return (
