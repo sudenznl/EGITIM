@@ -4,4 +4,3 @@ Redux’te action oluşturma, reducer tanımlama, store kullanma, dispatch etme 
 Bu sayede Redux ile global state yönetiminin nasıl organize edildiğini daha iyi anladım.
 
 ![Redux Diyagramı](./img/diagram.png)
-![Redux Logo](./img/diagram.png)
