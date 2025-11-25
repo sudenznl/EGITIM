@@ -5,7 +5,7 @@ import classes from './Counter.module.css';
 
   const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector(state => state.counter.counter);
+  const counter = useSelector(state => state.counter.counter); //gönderme işlevine erişmek için useDispatch kullanıyoruz.
   const show = useSelector( state => state.showCounter );
 
   const incrementHandler = () => {
