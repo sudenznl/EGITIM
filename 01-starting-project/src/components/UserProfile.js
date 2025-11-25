@@ -3,7 +3,7 @@ import classes from './UserProfile.module.css';
 const UserProfile = () => {
   return (
     <main className={classes.profile}>
-      <h2>Kullanıcı Profilim</h2>
+      <h2>Kullanıcı Profili</h2>
     </main>
   );
 };
