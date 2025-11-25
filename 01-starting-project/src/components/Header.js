@@ -7,13 +7,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <a href='/'>My Products</a>
+            <a href='/'>Ürünlerim</a>
           </li>
           <li>
-            <a href='/'>My Sales</a>
+            <a href='/'>Satışlarım</a>
           </li>
           <li>
-            <button>Logout</button>
+            <button>Çıkış</button>
           </li>
         </ul>
       </nav>
