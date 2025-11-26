@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: {
     items: [],
     totalQuantity: 0,
+    changed: false,
   },
   reducers: {
     replaceCart(state, action) {
@@ -15,6 +16,7 @@ const cartSlice = createSlice({
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id); //mevcut item için.
       state.totalQuantity++;
+      state.changed = true;
 
       //sepette ürün yoksa ürünü ekleyeceğiz :
       if (!existingItem) 
@@ -38,15 +40,19 @@ const cartSlice = createSlice({
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
       state.totalQuantity--;
-      if (existingItem.quantity === 1) {
+      if (existingItem.quantity === 1) 
+      {
         state.items = state.items.filter((item) => item.id !== id);
-      } else {
+      } 
+      else 
+      {
         existingItem.quantity--;
+        existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
     },
   },
 });
-
+ 
 export const cartActions = cartSlice.actions;
 
 export default cartSlice;
