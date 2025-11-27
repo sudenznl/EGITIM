@@ -1,0 +1,14 @@
+Bu proje aslında iki proje içeriyor:
+
+Bir React.js uygulaması (yani frontend SPA)
+
+React uygulamasının “konuşabileceği” sahte (dummy) bir backend API (veri göndermek ve almak için)
+
+Her iki proje klasöründe de "npm install" komutunu çalıştırmanız gerekir.
+
+Bundan sonra sahte backend API sunucusunu başlatmak için "backend-api" klasörü içinde "npm start" komutunu çalıştırabilirsiniz.
+React uygulaması geliştirme sunucusu da "react-frontend" klasörü içinde "npm start" ile başlatılır.
+
+Projelerin çalışması için her iki sunucunun (backend + frontend) da çalışıyor olması şarttır.
+
+Sahte backend API, herhangi bir harici veritabanı kullanmaz — bunun yerine sahte veriler proje klasöründeki "events.json" dosyasına kaydedilir.
