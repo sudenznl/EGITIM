@@ -4,7 +4,6 @@ const EVENT = [
   
 ];
 
-
 function EventPage() {
   return (
     <>
