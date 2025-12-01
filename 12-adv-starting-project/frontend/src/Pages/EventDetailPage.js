@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function EventDetailPage() {
   const params = useParams(); //bu hooks sayesinde bir bileşen işlevinde çağrıldığı zaman o anda etkin olan rol parametrelerine (yani url de kodlanan değerlere) erişmemizi sağlar.
