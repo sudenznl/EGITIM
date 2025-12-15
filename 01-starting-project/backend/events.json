@@ -1,0 +1,12 @@
+{
+  "events": [
+    {
+      "title": "A new event",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/M%C3%BCnchen_Panorama.JPG/1024px-M%C3%BCnchen_Panorama.JPG",
+      "date": "2022-10-01",
+      "description": "Some awesome event!",
+      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
+    }
+  ],
+  "users": []
+}
