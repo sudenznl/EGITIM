@@ -122,4 +122,3 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
-
