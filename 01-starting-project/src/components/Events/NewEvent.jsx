@@ -4,13 +4,18 @@ import { useMutation } from "@tanstack/react-query";
 import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
 import { createNewEvent } from "../../util/http.js";
+import { queryClient } from "../../util/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 export default function NewEvent() {
   const navigate = useNavigate();
 
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: () => createNewEvent,
+    mutationFn: createNewEvent,
+    onSuccess: () => {
+    queryClient.invalidateQueries({queryKey: ['events']});  
+    navigate('/events');
+    }
   });
 
   function handleSubmit(formData) {
@@ -24,20 +29,20 @@ export default function NewEvent() {
         {!isPending && (
           <>
             <Link to="../" className="button-text">
-              Cancel
+              Sil
             </Link>
             <button type="submit" className="button">
-              Create
+              OLuştur
             </button>
           </>
         )}
       </EventForm>
       {isError && (
         <ErrorBlock
-          title="Failed to create event"
+          title="davet oluşturulamadı!"
           message={
             error.info?.message ||
-            "Failed to create event. Please check your inputs and try again later."
+            "Davet oluşturulmadı. Lütfen verdiğiniz bilgelerin tam olduğundan emin olup yeniden deneyiniz."
           }
         />
       )}
