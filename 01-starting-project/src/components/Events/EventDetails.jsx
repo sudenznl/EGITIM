@@ -48,10 +48,11 @@ export default function EventDetails() {
 
   let content;
 
-  if (isPending) {
+  if (isPending) 
+  {
     content = (
       <div id="event-details-content" className="center">
-        <p>Davetler yükleniyor...</p>
+        <p>Veriler Yükleniyor...</p>
       </div>
     );
   }
@@ -60,17 +61,18 @@ export default function EventDetails() {
     content = (
       <div id="event-details-content" className="center">
         <ErrorBlock
-          title="Başarısız oldu"
+          title="Failed to load event"
           message={
             error.info?.message ||
-            'Veriler yüklenirken hata oluştu, lütfen daha sonra yeniden deneyiniz.'
+            'Failed to fetch event data, please try again later.'
           }
         />
       </div>
     );
   }
 
-  if (data) {
+  if (data) 
+  {
     const formattedDate = new Date(data.date).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
@@ -82,7 +84,7 @@ export default function EventDetails() {
         <header>
           <h1>{data.title}</h1>
           <nav>
-            <button onClick={handleStartDelete}>Sil</button>
+            <button onClick={handleStartDelete}>Delete</button>
             <Link to="edit">Düzenle</Link>
           </nav>
         </header>
@@ -106,12 +108,12 @@ export default function EventDetails() {
     <>
       {isDeleting && (
         <Modal onClose={handleStopDelete}>
-          <h2>Silme İşlemi:</h2>
+          <h2>Emin misin?</h2>
           <p>
-            Gerçekten bu daveti silmek istediğinize emin misiniz?
+            Gerçekten bu daveti silmek istiyor musun? Bu işlemin geri dönüşü yok.
           </p>
           <div className="form-actions">
-            {isPendingDeletion && <p>Siliniyor, lütfen bekleyiniz...</p>}
+            {isPendingDeletion && <p>Deleting, please wait...</p>}
             {!isPendingDeletion && (
               <>
                 <button onClick={handleStopDelete} className="button-text">
@@ -137,7 +139,7 @@ export default function EventDetails() {
       <Outlet />
       <Header>
         <Link to="/events" className="nav-item">
-          Tüm Davetleri Görüntüle 
+          Tüm Davetleri Görüntüle
         </Link>
       </Header>
       <article id="event-details">{content}</article>

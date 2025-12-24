@@ -11,8 +11,8 @@ export default function FindEventSection() {
   const [searchTerm, setSearchTerm] = useState();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['events', { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    queryKey: ['events', { searchTerm: searchTerm }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     enabled: searchTerm !== undefined
   });
 
@@ -23,11 +23,13 @@ export default function FindEventSection() {
 
   let content = <p>Lütfen bulmak istediğini daveti arayın.</p>;
 
-  if (isLoading) {
+  if (isLoading) 
+  {
     content = <LoadingIndicator />;
   }
 
-  if (isError) {
+  if (isError) 
+  {
     content = (
       <ErrorBlock
         title="An error occurred"
@@ -36,7 +38,8 @@ export default function FindEventSection() {
     );
   }
 
-  if (data) {
+  if (data) 
+  {
     content = (
       <ul className="events-list">
         {data.map((event) => (
@@ -51,7 +54,7 @@ export default function FindEventSection() {
   return (
     <section className="content-section" id="all-events-section">
       <header>
-        <h2>Find your next event!</h2>
+        <h2>Sıradaki Daveti Bul!</h2>
         <form onSubmit={handleSubmit} id="search-form">
           <input
             type="search"
